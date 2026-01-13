@@ -1,6 +1,6 @@
-import { createClient } from 'next-sanity'
+import { createClient } from "next-sanity"
 
-import { apiVersion, dataset, projectId } from '../env'
+import { apiVersion, dataset, projectId } from "../env"
 
 export const client = createClient({
   projectId,
@@ -9,6 +9,7 @@ export const client = createClient({
   useCdn: true, // Set to false if statically generating pages, using ISR or tag-based revalidation
   token: process.env.SANITY_VIEWER_TOKEN,
   stega: {
-    studioUrl: process.env.NEXT_PUBLIC_SANITY_STUDIO_URL || '/studio',
+    studioUrl: process.env.NEXT_PUBLIC_SANITY_STUDIO_URL || "/studio",
   },
+  resultSourceMap: true,
 })

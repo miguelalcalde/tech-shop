@@ -1,22 +1,11 @@
-import { getBlogPostsAction } from "@/actions/blog-actions";
-import BlogCard from "./blog-card";
+import { BlogPost } from "@/types"
+import BlogCard from "./blog-card"
 
-// Draft mode is handled automatically by sanityFetch - no preview prop needed
-export default async function BlogGrid() {
-  const result = await getBlogPostsAction();
+interface BlogGridProps {
+  posts: BlogPost[]
+}
 
-  if (!result.isSuccess) {
-    return (
-      <div className="text-center py-12">
-        <p className="font-mono text-lg text-gray-600">
-          Unable to load blog posts. Please try again later.
-        </p>
-      </div>
-    );
-  }
-
-  const { posts } = result.data;
-
+export default async function BlogGrid({ posts }: BlogGridProps) {
   if (posts.length === 0) {
     return (
       <div className="text-center py-12">
@@ -24,7 +13,7 @@ export default async function BlogGrid() {
           No blog posts available yet. Check back soon!
         </p>
       </div>
-    );
+    )
   }
 
   return (
@@ -33,6 +22,5 @@ export default async function BlogGrid() {
         <BlogCard key={post.slug} post={post} />
       ))}
     </div>
-  );
+  )
 }
-

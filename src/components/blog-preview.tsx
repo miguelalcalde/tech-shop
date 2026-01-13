@@ -1,15 +1,16 @@
-import { getBlogPostsAction } from "@/actions/blog-actions";
-import BlogCard from "./blog-card";
-import Link from "next/link";
+import { getBlogPosts } from "@/lib/sanity/queries/blog"
+import { BlogPost } from "@/types"
+import BlogCard from "./blog-card"
+import Link from "next/link"
 
 export default async function BlogPreview() {
-  const result = await getBlogPostsAction();
+  const posts = await getBlogPosts()
 
-  if (!result.isSuccess || result.data.posts.length === 0) {
-    return null;
+  if (posts.length === 0) {
+    return null
   }
 
-  const latestPosts = result.data.posts.slice(0, 3);
+  const latestPosts = posts.slice(0, 3)
 
   return (
     <section className="bg-yellow-400 border-y-4 border-black py-16">
@@ -26,12 +27,11 @@ export default async function BlogPreview() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {latestPosts.map((post) => (
+          {latestPosts.map((post: BlogPost) => (
             <BlogCard key={post.slug} post={post} />
           ))}
         </div>
       </div>
     </section>
-  );
+  )
 }
-

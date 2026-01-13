@@ -2,13 +2,9 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import {
-  getBlogPostBySlugAction,
-  getBlogPostsAction,
-} from "@/actions/blog-actions"
+import { getBlogPosts, getBlogPostBySlug } from "@/lib/sanity/queries/blog"
 
 // Enable ISR for Draft Mode support in Vercel Toolbar
-// Draft mode is handled automatically by sanityFetch - no need to call draftMode() here
 export const revalidate = 60
 
 interface BlogPostPageProps {
@@ -17,41 +13,35 @@ interface BlogPostPageProps {
 
 export async function generateMetadata({ params }: BlogPostPageProps) {
   const { slug } = await params
-  const result = await getBlogPostBySlugAction(slug)
+  const post = await getBlogPostBySlug(slug)
 
-  if (!result.isSuccess) {
+  if (!post) {
     return {
       title: "Post Not Found | ACME Tech Shop",
     }
   }
 
   return {
-    title: `${result.data.post.title} | ACME Tech Shop Blog`,
-    description: result.data.post.extract,
+    title: `${post.title} | ACME Tech Shop Blog`,
+    description: post.extract,
   }
 }
 
 export async function generateStaticParams() {
-  const result = await getBlogPostsAction()
+  const posts = await getBlogPosts()
 
-  if (!result.isSuccess) {
-    return []
-  }
-
-  return result.data.posts.map((post) => ({
+  return posts.map((post: { slug: string }) => ({
     slug: post.slug,
   }))
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params
-  const result = await getBlogPostBySlugAction(slug)
+  const post = await getBlogPostBySlug(slug)
 
-  if (!result.isSuccess) {
+  if (!post) {
     notFound()
   }
-
-  const { post } = result.data
 
   const formattedDate = new Date(post.publishedAt).toLocaleDateString("en-US", {
     year: "numeric",
@@ -107,7 +97,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 className="max-w-none font-mono prose prose-lg"
                 data-sanity-edit-target
               >
-                {post.body.split("\n\n").map((paragraph, index) => {
+                {post.body.split("\n\n").map((paragraph: string, index: number) => {
                   if (paragraph.startsWith("## ")) {
                     return (
                       <h2
@@ -137,7 +127,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     const items = paragraph.split("\n")
                     return (
                       <ul key={index} className="my-4 space-y-2 list-none">
-                        {items.map((item, i) => (
+                        {items.map((item: string, i: number) => (
                           <li
                             key={i}
                             className="pl-6 relative before:content-['→'] before:absolute before:left-0 before:font-bold"
@@ -154,7 +144,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
                     return (
                       <ol key={index} className="my-4 space-y-2 list-none">
-                        {items.map((item, i) => {
+                        {items.map((item: string, i: number) => {
                           return (
                             <li key={i} className="relative pl-8">
                               <span className="flex absolute left-0 justify-center items-center w-6 h-6 text-sm font-black bg-yellow-400 border-2 border-black">
@@ -170,7 +160,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
                   return (
                     <p key={index} className="my-4 leading-relaxed">
-                      {paragraph.split(/(\*\*[^*]+\*\*)/).map((part, i) => {
+                      {paragraph.split(/(\*\*[^*]+\*\*)/).map((part: string, i: number) => {
                         if (part.startsWith("**") && part.endsWith("**")) {
                           return (
                             <strong key={i} className="font-bold">

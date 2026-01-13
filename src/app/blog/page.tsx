@@ -2,6 +2,8 @@ import { Suspense } from "react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import BlogGrid from "@/components/blog-grid"
+import { getBlogPosts } from "@/lib/sanity/queries/blog"
+import { draftMode } from "next/headers"
 
 export const metadata = {
   title: "Tech Blog | ACME Tech Shop",
@@ -9,7 +11,6 @@ export const metadata = {
 }
 
 // Enable ISR for Draft Mode support in Vercel Toolbar
-// Note: Page is dynamic due to draftMode() check, but uses ISR for data caching
 export const revalidate = 60
 
 function BlogGridSkeleton() {
@@ -33,6 +34,9 @@ function BlogGridSkeleton() {
 }
 
 export default async function BlogPage() {
+  const { isEnabled } = await draftMode()
+  const posts = await getBlogPosts(!(isEnabled ?? false))
+
   return (
     <div className="flex flex-col min-h-screen bg-white">
       <Header />
@@ -51,7 +55,7 @@ export default async function BlogPage() {
 
         <section className="container mx-auto px-4 py-16">
           <Suspense fallback={<BlogGridSkeleton />}>
-            <BlogGrid />
+            <BlogGrid posts={posts} />
           </Suspense>
         </section>
       </main>
