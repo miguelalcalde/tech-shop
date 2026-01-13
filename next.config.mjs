@@ -1,4 +1,4 @@
-import { withVercelToolbar } from "@vercel/toolbar/plugins/next";
+import { withVercelToolbar } from "@vercel/toolbar/plugins/next"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -11,6 +11,6 @@ const nextConfig = {
   experimental: {
     useCache: true,
   },
-};
+}
 
-export default withVercelToolbar()(nextConfig);
+export default withVercelToolbar({ enableInProduction: true })(nextConfig)
