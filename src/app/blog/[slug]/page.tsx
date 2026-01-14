@@ -9,6 +9,9 @@ import { isDraftMode } from "@/lib/is-draft-mode"
 // ISR: Revalidate every 60 seconds - Draft Mode will automatically switch to dynamic when enabled
 export const revalidate = 60
 
+// Revalidate every 60 seconds (ISR) - new posts appear without redeploy
+export const revalidate = 60
+
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>
 }
