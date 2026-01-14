@@ -13,6 +13,9 @@ export const metadata = {
 // Force static generation - Draft Mode will automatically switch to dynamic when enabled
 export const dynamic = "force-static"
 
+// Revalidate every 60 seconds (ISR) - new posts appear without redeploy
+export const revalidate = 60
+
 function BlogGridSkeleton() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

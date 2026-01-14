@@ -9,6 +9,9 @@ import { isDraftMode } from "@/lib/is-draft-mode"
 // Force static generation - Draft Mode will automatically switch to dynamic when enabled
 export const dynamic = "force-static"
 
+// Revalidate every 60 seconds (ISR) - new posts appear without redeploy
+export const revalidate = 60
+
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>
 }
