@@ -370,6 +370,8 @@ export async function generateStaticParams() {
 
 ### ❌ Pitfall 2: Hiding Draft Mode Check Inside Data Fetching
 
+> This pattern won't work because it buries the draft mode check inside the data fetching function, making it harder to reason about and test your logic. More importantly, functions like `isDraftMode()` can only be used within a request context, not at build time (such as in `generateStaticParams`). If your data loader calls it internally, you'll accidentally break static generation and get runtime errors at build.
+
 ```typescript
 // ❌ WRONG - Draft mode check is hidden
 export async function getBlogPosts() {
@@ -377,41 +379,37 @@ export async function getBlogPosts() {
   // ...
 }
 
-// ✅ CORRECT - Accept isDraft as parameter
+// ✅ CORRECT - Accept isDraft as parameter from the caller
 export async function getBlogPosts(isDraft: boolean) {
   // ...
 }
 ```
 
-### ❌ Pitfall 3: Using `revalidate` Instead of `dynamic = 'force-static'`
+### ❌ Pitfall 3: Using `revalidate` and not using `dynamic = 'force-static'`
+
+One of the most confusing and misunderstood aspects of Draft Mode in Next.js is how to declare your page's route segment for static or dynamic behavior. The Next.js docs often recommend using Incremental Static Regeneration (ISR) via `export const revalidate = 60`, which works for most classic content workflows. **However, if you want your content to be _fully static during normal operation_ and _dynamically rendered only when Draft Mode is enabled_, you should use `export const dynamic = "force-static"` instead.**
+
+Here's why:
+
+- `revalidate = 60` enables ISR, meaning your page will regenerate at most once every 60 seconds, but it's still considered a static page at its core. The catch: if you enable Draft Mode, ISR does _not_ make the page dynamic—the framework is still allowed to serve stale content, and previewing draft/unpublished content is inconsistent.
+- Setting `dynamic = "force-static"` **explicitly configures the route as static _unless_ Draft Mode is enabled**. Next.js will then _automatically_ switch the route to dynamic rendering when Draft Mode is active. This ensures previews and staging work exactly as intended, showing draft content and avoiding cache confusion.
+- If you leave both off, or use only `revalidate`, Vercel won't be able to identify your page as static and the **Draft Mode** option will not be displayed in the Vercel Toolbar.
+
+That means:
 
 ```typescript
-// ❌ Less explicit - page may still become dynamic
+// ❌ Misleading, allows for static regeneration but NOT for safe/consistent previewing with Draft Mode
 export const revalidate = 60
 
-// ✅ CORRECT - Explicitly declares static, auto-switches for draft mode
+// ✅ Explicitly tells Next.js: "make this static, but switch to fully dynamic when draft mode is on"
+export const revalidate = 60
 export const dynamic = "force-static"
 ```
 
-### ❌ Pitfall 4: Missing try/catch in Draft Mode Helper
+**In short:**
 
-```typescript
-// ❌ WRONG - Throws at build time
-export const isDraftMode = cache(async () => {
-  const { isEnabled } = await draftMode()
-  return isEnabled
-})
-
-// ✅ CORRECT - Handles build-time gracefully
-export const isDraftMode = cache(async () => {
-  try {
-    const { isEnabled } = await draftMode()
-    return isEnabled
-  } catch {
-    return false
-  }
-})
-```
+> Use `dynamic = "force-static"` if you care about reliable previews in Draft Mode.  
+> Use `revalidate` for "stale-while-revalidate" but be aware it's not preview/draft aware!
 
 ---
 
@@ -444,7 +442,7 @@ Or simply visit these URLs in your browser.
 
 | Environment          | Toolbar Visible? | Draft Mode Toggle? | Why                                    |
 | -------------------- | ---------------- | ------------------ | -------------------------------------- |
-| `next dev`           | ✅ Yes           | ✅ Yes             | Dev server mocks Vercel infrastructure |
+| `next dev`           | ✅ Yes           | ❌ No              | Dev server mocks Vercel infrastructure |
 | `next start` (local) | ✅ Yes\*         | ❌ No              | No `x-vercel-token-status` header      |
 | Vercel Preview       | ✅ Yes           | ✅ Yes             | Vercel infrastructure handles it       |
 | Vercel Production    | ✅ Yes           | ✅ Yes             | Vercel infrastructure handles it       |
@@ -499,37 +497,17 @@ pnpm build && pnpm start
 
 ### How Draft Mode Detection Works
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                         DETECTION FLOW                                   │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│  ┌──────────────────┐     postMessage      ┌─────────────────────┐      │
-│  │   Toolbar UI     │ ──────────────────▶  │   Parent Window     │      │
-│  │   (iframe)       │  'get-draft-status'  │   (Your Page)       │      │
-│  └──────────────────┘                      └─────────────────────┘      │
-│           │                                          │                   │
-│           │                                          │ HEAD request      │
-│           │                                          │ x-vercel-draft-   │
-│           │                                          │ status: 1         │
-│           │                                          ▼                   │
-│           │                                ┌─────────────────────┐      │
-│           │                                │   Vercel Infra      │      │
-│           │                                │   (or middleware)   │      │
-│           │                                └─────────────────────┘      │
-│           │                                          │                   │
-│           │                                          │ x-vercel-token-   │
-│           │                                          │ status: enabled   │
-│           │                                          ▼                   │
-│           │      postMessage               ┌─────────────────────┐      │
-│           │ ◀────────────────────────────  │  'draft-status-     │      │
-│           │    'draft-status-result'       │   result' message   │      │
-│           ▼                                └─────────────────────┘      │
-│  ┌──────────────────┐                                                   │
-│  │  Show Eye icon   │                                                   │
-│  │  (solid/dashed)  │                                                   │
-│  └──────────────────┘                                                   │
-└─────────────────────────────────────────────────────────────────────────┘
+```mermaid
+sequenceDiagram
+  participant Toolbar as Toolbar UI (iframe)
+  participant Page as Parent Window (Your Page)
+  participant Vercel as Vercel Infra (or middleware)
+
+  Toolbar->>Page: postMessage ('get-draft-status')
+  Page->>Vercel: HEAD request (x-vercel-draft-status: 1)
+  Vercel-->>Page: x-vercel-token-status: enabled
+  Page->>Toolbar: postMessage ('draft-status-result')
+  Toolbar->>Toolbar: Show Eye icon (solid/dashed)
 ```
 
 ### How Draft Mode Toggle Works
