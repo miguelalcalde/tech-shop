@@ -47,15 +47,19 @@ npm install @vercel/toolbar
 
 ### Recommended Pattern
 
-The correct pattern for Draft Mode follows these principles:
+The correct pattern combines **static generation** with **ISR** (Incremental Static Regeneration) to get the best of both worlds:
 
-| **Step** | **Correct Pattern**                                                 | **Comments**                                                                                                             |
-| -------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| 1        | Page declares: `export const dynamic = 'force-static'`              | Tells Next.js to statically generate the page, but will switch to dynamic when Draft Mode cookie is present              |
-| 2        | `generateStaticParams()` uses SIMPLE function (no draft mode check) | Runs at build time (no request context), so checking draft mode here would error                                         |
-| 3        | Page component EXPLICITLY calls `isDraftMode()`                     | Ensures the draft mode check is visible in the page component, giving clear control over rendering behavior              |
-| 4        | `isDraft` is PASSED to data fetching functions as parameter         | Keeps data fetching logic pure and testable, instead of reading draft state internally                                   |
-| 5        | `isDraftMode()` helper uses try/catch for safety                    | Prevents errors if called when there is no request context, which can happen at build time or in static generation cases |
+- **Draft Mode** for previewing unpublished content
+- **ISR** for automatic updates without redeploy
+- **On-demand revalidation** for instant updates via webhooks
+
+| **Step** | **Correct Pattern**                                                 | **Comments**                                                                                                |
+| -------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| 1        | Page declares: `export const dynamic = 'force-static'`              | Tells Next.js to statically generate the page, but will switch to dynamic when Draft Mode cookie is present |
+| 2        | Page declares: `export const revalidate = 60`                       | Enables ISR—pages regenerate in the background every 60 seconds, so new content appears without redeploy    |
+| 3        | `generateStaticParams()` uses SIMPLE function (no draft mode check) | Runs at build time (no request context), so checking draft mode here would error                            |
+| 4        | Page component EXPLICITLY calls `isDraftMode()`                     | Ensures the draft mode check is visible in the page component, giving clear control over rendering behavior |
+| 5        | `isDraft` is PASSED to data fetching functions as parameter         | Keeps data fetching logic pure and testable, instead of reading draft state internally                      |
 
 ---
 
@@ -75,6 +79,8 @@ export default withVercelToolbar({
   enableInProduction: true, // Required for local production testing
 })(nextConfig)
 ```
+
+Note: Draft mode will not be available in your local productions server, you will need to deploy to Vercel to test it.
 
 ### Step 2: Add Vercel Toolbar to Layout
 
@@ -153,6 +159,8 @@ export async function GET(request: Request) {
 
 **Key:** Create separate functions for different purposes:
 
+One of these functions will use the draft mode perspective, the other will not.
+
 ```typescript
 // src/lib/sanity/queries/blog.ts
 import { client } from "@/sanity/lib/client"
@@ -220,14 +228,17 @@ import {
 } from "@/lib/sanity/queries/blog"
 import { isDraftMode } from "@/lib/is-draft-mode"
 
-// ✅ Force static generation - auto-switches to dynamic when Draft Mode enabled
+// Force static generation - auto-switches to dynamic when Draft Mode enabled
 export const dynamic = "force-static"
+
+// Revalidate every 60 seconds (ISR) - new posts appear without redeploy
+export const revalidate = 60
 
 interface PageProps {
   params: Promise<{ slug: string }>
 }
 
-// ✅ Use simple function that does NOT call draftMode()
+// Use simple function that does NOT call draftMode()
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const slugs = await getAllBlogPostSlugs()
   return slugs.map((slug) => ({ slug }))
@@ -235,8 +246,8 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params
-  const isDraft = await isDraftMode() // ✅ Explicit call
-  const post = await getBlogPostBySlug(slug, isDraft) // ✅ Pass as parameter
+  const isDraft = await isDraftMode() // Explicit call
+  const post = await getBlogPostBySlug(slug, isDraft) // Pass as parameter
 
   if (!post) {
     return { title: "Post Not Found" }
@@ -250,8 +261,8 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params
-  const isDraft = await isDraftMode() // ✅ Explicit call
-  const post = await getBlogPostBySlug(slug, isDraft) // ✅ Pass as parameter
+  const isDraft = await isDraftMode() // Explicit call
+  const post = await getBlogPostBySlug(slug, isDraft) // Pass as parameter
 
   if (!post) {
     notFound()
@@ -265,6 +276,77 @@ export default async function BlogPostPage({ params }: PageProps) {
   )
 }
 ```
+
+### Step 7: On-Demand Revalidation (Optional but Recommended)
+
+For instant updates when content changes in your CMS, set up a webhook-triggered revalidation endpoint.
+
+Next.js is well known for [ISR](https://nextjs.org/docs/app/guides/incremental-static-regeneration) which is a technique that allows you to revalidate your pages at a given interval. One of the benefits of implementing ISR is one can (1) render existing pages at build time, and revalidate at intervals, but we can also (2) generate new pages as they become available in our CMS, thus not having to redeploy the application when new content is available.
+
+```typescript
+// src/app/api/revalidate/route.ts
+import { revalidatePath, revalidateTag } from "next/cache"
+import { type NextRequest, NextResponse } from "next/server"
+import { parseBody } from "next-sanity/webhook"
+
+const SANITY_REVALIDATE_SECRET = process.env.SANITY_REVALIDATE_SECRET
+
+type WebhookPayload = {
+  _type: string
+  slug?: { current: string }
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    if (!SANITY_REVALIDATE_SECRET) {
+      return NextResponse.json(
+        { message: "Missing SANITY_REVALIDATE_SECRET" },
+        { status: 500 }
+      )
+    }
+
+    const { isValidSignature, body } = await parseBody<WebhookPayload>(
+      request,
+      SANITY_REVALIDATE_SECRET
+    )
+
+    if (!isValidSignature) {
+      return NextResponse.json(
+        { message: "Invalid signature" },
+        { status: 401 }
+      )
+    }
+
+    if (!body?._type) {
+      return NextResponse.json(
+        { message: "Missing document type" },
+        { status: 400 }
+      )
+    }
+
+    // Revalidate based on document type
+    switch (body._type) {
+      case "post":
+        revalidatePath("/blog")
+        if (body.slug?.current) {
+          revalidatePath(`/blog/${body.slug.current}`)
+        }
+        revalidateTag("posts")
+        break
+      // Add more cases as needed
+    }
+
+    return NextResponse.json({ revalidated: true, now: Date.now() })
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Error revalidating", error: String(error) },
+      { status: 500 }
+    )
+  }
+}
+```
+
+Then configure a webhook in Sanity to call `https://your-domain.com/api/revalidate` on document publish/unpublish events.
 
 ---
 
@@ -493,15 +575,17 @@ This means `draftMode()` is being called during build time. Check:
 
 ## Summary
 
-| What                   | How                                       |
-| ---------------------- | ----------------------------------------- |
-| Page rendering         | `export const dynamic = "force-static"`   |
-| `generateStaticParams` | Use simple function, NO draft mode check  |
-| Page component         | Call `isDraftMode()` explicitly           |
-| Data fetching          | Accept `isDraft` as parameter             |
-| Draft mode helper      | Use `cache()` + try/catch                 |
-| Local testing          | Use API routes (`/api/draft-mode/enable`) |
-| Production testing     | Use Vercel Toolbar eye icon               |
+| What                   | How                                                 |
+| ---------------------- | --------------------------------------------------- |
+| Page rendering         | `export const dynamic = "force-static"`             |
+| ISR (time-based)       | `export const revalidate = 60` + fetch `revalidate` |
+| On-demand revalidation | Webhook endpoint with `revalidatePath()`            |
+| `generateStaticParams` | Use simple function, NO draft mode check            |
+| Page component         | Call `isDraftMode()` explicitly                     |
+| Data fetching          | Accept `isDraft` as parameter                       |
+| Draft mode helper      | Use `cache()` + try/catch                           |
+| Local testing          | Use API routes (`/api/draft-mode/enable`)           |
+| Production testing     | Use Vercel Toolbar eye icon                         |
 
 ---
 
