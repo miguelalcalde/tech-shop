@@ -3,13 +3,16 @@ import Link from "next/link"
 import type { Metadata } from "next"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { getAllBlogPostSlugs, getBlogPostBySlug } from "@/lib/sanity/queries/blog"
+import {
+  getAllBlogPostSlugs,
+  getBlogPostBySlug,
+} from "@/lib/sanity/queries/blog"
 import { isDraftMode } from "@/lib/is-draft-mode"
 
 // Force static generation - Draft Mode will automatically switch to dynamic when enabled
 export const dynamic = "force-static"
 
-// Revalidate every 60 seconds (ISR) - new posts appear without redeploy
+// ISR: Revalidate every 60 seconds - new posts appear without redeploy
 export const revalidate = 60
 
 interface BlogPostPageProps {
@@ -104,82 +107,89 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 className="max-w-none font-mono prose prose-lg"
                 data-sanity-edit-target
               >
-                {post.body.split("\n\n").map((paragraph: string, index: number) => {
-                  if (paragraph.startsWith("## ")) {
-                    return (
-                      <h2
-                        key={index}
-                        className="pb-2 mt-8 mb-4 text-2xl font-black uppercase border-b-4 border-black"
-                      >
-                        {paragraph.replace("## ", "")}
-                      </h2>
-                    )
-                  }
+                {post.body
+                  .split("\n\n")
+                  .map((paragraph: string, index: number) => {
+                    if (paragraph.startsWith("## ")) {
+                      return (
+                        <h2
+                          key={index}
+                          className="pb-2 mt-8 mb-4 text-2xl font-black uppercase border-b-4 border-black"
+                        >
+                          {paragraph.replace("## ", "")}
+                        </h2>
+                      )
+                    }
 
-                  if (paragraph.startsWith("**") && paragraph.endsWith("**")) {
-                    return (
-                      <h3
-                        key={index}
-                        className="mt-6 mb-3 text-xl font-black uppercase"
-                      >
-                        {paragraph.replace(/\*\*/g, "")}
-                      </h3>
-                    )
-                  }
+                    if (
+                      paragraph.startsWith("**") &&
+                      paragraph.endsWith("**")
+                    ) {
+                      return (
+                        <h3
+                          key={index}
+                          className="mt-6 mb-3 text-xl font-black uppercase"
+                        >
+                          {paragraph.replace(/\*\*/g, "")}
+                        </h3>
+                      )
+                    }
 
-                  if (
-                    paragraph.startsWith("- ") ||
-                    paragraph.startsWith("* ")
-                  ) {
-                    const items = paragraph.split("\n")
-                    return (
-                      <ul key={index} className="my-4 space-y-2 list-none">
-                        {items.map((item: string, i: number) => (
-                          <li
-                            key={i}
-                            className="pl-6 relative before:content-['→'] before:absolute before:left-0 before:font-bold"
-                          >
-                            {item.replace(/^[-*]\s/, "")}
-                          </li>
-                        ))}
-                      </ul>
-                    )
-                  }
-
-                  if (paragraph.match(/^\d+\.\s/)) {
-                    const items = paragraph.split("\n")
-
-                    return (
-                      <ol key={index} className="my-4 space-y-2 list-none">
-                        {items.map((item: string, i: number) => {
-                          return (
-                            <li key={i} className="relative pl-8">
-                              <span className="flex absolute left-0 justify-center items-center w-6 h-6 text-sm font-black bg-yellow-400 border-2 border-black">
-                                {i + 1}
-                              </span>
-                              {item.replace(/^\d+\.\s+/g, "")}
+                    if (
+                      paragraph.startsWith("- ") ||
+                      paragraph.startsWith("* ")
+                    ) {
+                      const items = paragraph.split("\n")
+                      return (
+                        <ul key={index} className="my-4 space-y-2 list-none">
+                          {items.map((item: string, i: number) => (
+                            <li
+                              key={i}
+                              className="pl-6 relative before:content-['→'] before:absolute before:left-0 before:font-bold"
+                            >
+                              {item.replace(/^[-*]\s/, "")}
                             </li>
-                          )
-                        })}
-                      </ol>
-                    )
-                  }
+                          ))}
+                        </ul>
+                      )
+                    }
 
-                  return (
-                    <p key={index} className="my-4 leading-relaxed">
-                      {paragraph.split(/(\*\*[^*]+\*\*)/).map((part: string, i: number) => {
-                        if (part.startsWith("**") && part.endsWith("**")) {
-                          return (
-                            <strong key={i} className="font-bold">
-                              {part.replace(/\*\*/g, "")}
-                            </strong>
-                          )
-                        }
-                        return part
-                      })}
-                    </p>
-                  )
-                })}
+                    if (paragraph.match(/^\d+\.\s/)) {
+                      const items = paragraph.split("\n")
+
+                      return (
+                        <ol key={index} className="my-4 space-y-2 list-none">
+                          {items.map((item: string, i: number) => {
+                            return (
+                              <li key={i} className="relative pl-8">
+                                <span className="flex absolute left-0 justify-center items-center w-6 h-6 text-sm font-black bg-yellow-400 border-2 border-black">
+                                  {i + 1}
+                                </span>
+                                {item.replace(/^\d+\.\s+/g, "")}
+                              </li>
+                            )
+                          })}
+                        </ol>
+                      )
+                    }
+
+                    return (
+                      <p key={index} className="my-4 leading-relaxed">
+                        {paragraph
+                          .split(/(\*\*[^*]+\*\*)/)
+                          .map((part: string, i: number) => {
+                            if (part.startsWith("**") && part.endsWith("**")) {
+                              return (
+                                <strong key={i} className="font-bold">
+                                  {part.replace(/\*\*/g, "")}
+                                </strong>
+                              )
+                            }
+                            return part
+                          })}
+                      </p>
+                    )
+                  })}
               </div>
             </div>
 

@@ -37,3 +37,4 @@ next-env.d.ts
 .mcp.json
 opencode.json
 AGENTS.md
+.gitleaks.toml
