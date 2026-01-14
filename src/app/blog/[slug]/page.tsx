@@ -6,8 +6,8 @@ import Footer from "@/components/footer"
 import { getAllBlogPostSlugs, getBlogPostBySlug } from "@/lib/sanity/queries/blog"
 import { isDraftMode } from "@/lib/is-draft-mode"
 
-// Force static generation - Draft Mode will automatically switch to dynamic when enabled
-export const dynamic = "force-static"
+// ISR: Revalidate every 60 seconds - Draft Mode will automatically switch to dynamic when enabled
+export const revalidate = 60
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>

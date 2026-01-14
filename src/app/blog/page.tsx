@@ -10,8 +10,8 @@ export const metadata = {
   description: "Latest tech news, reviews, and guides from the Tech Shop team.",
 }
 
-// Force static generation - Draft Mode will automatically switch to dynamic when enabled
-export const dynamic = "force-static"
+// ISR: Revalidate every 60 seconds - Draft Mode will automatically switch to dynamic when enabled
+export const revalidate = 60
 
 function BlogGridSkeleton() {
   return (
