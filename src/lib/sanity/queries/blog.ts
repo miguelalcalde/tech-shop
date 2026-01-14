@@ -80,6 +80,7 @@ export async function getBlogPosts(isDraft: boolean): Promise<BlogPost[]> {
           perspective: "drafts" as const,
           useCdn: false,
           token: process.env.SANITY_VIEWER_TOKEN,
+          stega: true,
         }
       : {
           next: { revalidate: 60 },
@@ -106,6 +107,7 @@ export async function getBlogPostBySlug(
           perspective: "drafts" as const,
           useCdn: false,
           token: process.env.SANITY_VIEWER_TOKEN,
+          stega: true,
         }
       : {
           next: { revalidate: 60 },
