@@ -1,14 +1,7 @@
-import { defineEnableDraftMode } from "next-sanity/draft-mode"
+import { draftMode } from "next/headers"
 
-import { client } from "@/sanity/lib/client"
-import { token } from "@/sanity/lib/token"
-
-/**
- * defineEnableDraftMode() is used to enable draft mode. Set the route of this file
- * as the previewMode.enable option for presentationTool in your sanity.config.ts
- * Learn more: https://github.com/sanity-io/next-sanity?tab=readme-ov-file#5-integrating-with-sanity-presentation-tool--visual-editing
- */
-
-export const { GET } = defineEnableDraftMode({
-  client: client.withConfig({ token }),
-})
+export async function GET(request: Request) {
+  const draft = await draftMode()
+  draft.enable()
+  return new Response("Draft mode is enabled")
+}

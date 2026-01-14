@@ -3,15 +3,15 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import BlogGrid from "@/components/blog-grid"
 import { getBlogPosts } from "@/lib/sanity/queries/blog"
-import { draftMode } from "next/headers"
+import { isDraftMode } from "@/lib/is-draft-mode"
 
 export const metadata = {
   title: "Tech Blog | ACME Tech Shop",
   description: "Latest tech news, reviews, and guides from the Tech Shop team.",
 }
 
-// Enable ISR for Draft Mode support in Vercel Toolbar
-export const revalidate = 60
+// Force static generation - Draft Mode will automatically switch to dynamic when enabled
+export const dynamic = "force-static"
 
 function BlogGridSkeleton() {
   return (
@@ -34,8 +34,8 @@ function BlogGridSkeleton() {
 }
 
 export default async function BlogPage() {
-  const { isEnabled } = await draftMode()
-  const posts = await getBlogPosts(!(isEnabled ?? false))
+  const isDraft = await isDraftMode()
+  const posts = await getBlogPosts(isDraft)
 
   return (
     <div className="flex flex-col min-h-screen bg-white">

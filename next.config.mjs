@@ -13,4 +13,6 @@ const nextConfig = {
   },
 }
 
-export default withVercelToolbar({ enableInProduction: true })(nextConfig)
+export default withVercelToolbar({
+  enableInProduction: true,
+})(nextConfig)

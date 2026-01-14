@@ -1,19 +1,24 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
+import type { Metadata } from "next"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { getBlogPosts, getBlogPostBySlug } from "@/lib/sanity/queries/blog"
+import { getAllBlogPostSlugs, getBlogPostBySlug } from "@/lib/sanity/queries/blog"
+import { isDraftMode } from "@/lib/is-draft-mode"
 
-// Enable ISR for Draft Mode support in Vercel Toolbar
-export const revalidate = 60
+// Force static generation - Draft Mode will automatically switch to dynamic when enabled
+export const dynamic = "force-static"
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>
 }
 
-export async function generateMetadata({ params }: BlogPostPageProps) {
+export async function generateMetadata({
+  params,
+}: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params
-  const post = await getBlogPostBySlug(slug)
+  const isDraft = await isDraftMode()
+  const post = await getBlogPostBySlug(slug, isDraft)
 
   if (!post) {
     return {
@@ -27,17 +32,16 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   }
 }
 
-export async function generateStaticParams() {
-  const posts = await getBlogPosts()
-
-  return posts.map((post: { slug: string }) => ({
-    slug: post.slug,
-  }))
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  // Use simple slug fetcher - no draft mode check needed at build time
+  const slugs = await getAllBlogPostSlugs()
+  return slugs.map((slug) => ({ slug }))
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params
-  const post = await getBlogPostBySlug(slug)
+  const isDraft = await isDraftMode()
+  const post = await getBlogPostBySlug(slug, isDraft)
 
   if (!post) {
     notFound()
