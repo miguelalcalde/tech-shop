@@ -9,7 +9,10 @@ import {
 } from "@/lib/sanity/queries/blog"
 import { isDraftMode } from "@/lib/is-draft-mode"
 
-// ISR: Revalidate every 60 seconds - Draft Mode will automatically switch to dynamic when enabled
+// Force static generation - Draft Mode will automatically switch to dynamic when enabled
+export const dynamic = "force-static"
+
+// ISR: Revalidate every 60 seconds - new posts appear without redeploy
 export const revalidate = 60
 
 interface BlogPostPageProps {
