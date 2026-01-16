@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils"
 import "./globals.css"
 import { VercelToolbar } from "@vercel/toolbar/next"
 
@@ -17,7 +18,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={GeistSans.className}>
+      <body className={cn("bg-secondary", GeistSans.className)}>
         {shouldInjectToolbar && <VercelToolbar />}
         <div className="toolbar-content-container">{children}</div>
       </body>

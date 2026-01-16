@@ -28,15 +28,17 @@ export default function CheckoutContent() {
 
   return (
     <>
-      <Link
-        href="/cart"
-        className="inline-flex items-center gap-2 font-bold uppercase text-sm hover:underline mb-6"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        Back to Cart
-      </Link>
+      <div className="mb-6">
+        <Link
+          href="/cart"
+          className="inline-flex items-center gap-2 font-bold uppercase text-sm hover:underline"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to Cart
+        </Link>
+      </div>
 
-      <h1 className="font-black text-4xl uppercase mb-8 border-4 border-black inline-block px-8 py-4">
+      <h1 className="font-black text-4xl uppercase mb-8 border-4 border-black block px-8 py-4 w-fit">
         Checkout
       </h1>
 
