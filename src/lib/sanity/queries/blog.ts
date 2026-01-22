@@ -3,9 +3,15 @@ import { BlogPost } from "@/types"
 
 // GROQ Queries
 // Query to include all posts (regardless of published state) - for draft mode
+// Note: _originalId is automatically added by Sanity when using perspective: "drafts"
+// - _originalId starts with "drafts." if the document has unpublished changes
+// - hasPublishedVersion checks if a published version exists (sub-query runs against raw data)
 const BLOG_POSTS_QUERY = `
   *[_type == "post" && defined(slug.current)]
   | order(publishedAt desc) {
+    _id,
+    _originalId,
+    "hasPublishedVersion": defined(*[_id == ^._id && !(_id in path("drafts.**"))][0]),
     "slug": slug.current,
     title,
     extract,
@@ -25,6 +31,7 @@ const BLOG_POSTS_QUERY_PROD = `
     !(_id in path("drafts.**"))
   ]
   | order(publishedAt desc) {
+    _id,
     "slug": slug.current,
     title,
     extract,
