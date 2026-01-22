@@ -14,6 +14,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  // Enable in production for demo purposes
   const shouldInjectToolbar = true //  process.env.NODE_ENV === "development"
 
   return (

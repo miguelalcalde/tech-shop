@@ -3,6 +3,7 @@ import { NextResponse } from "next/server"
 
 // Simple toggle for local development only
 export async function GET() {
+  // Enable in production for demo purposes
   /* if (process.env.NODE_ENV !== "development") {
     return NextResponse.json({ error: "Only available in development" }, { status: 403 });
   } */
