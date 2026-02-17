@@ -8,6 +8,7 @@ export default async function Header() {
   const showBanner = await bannerFlag()
 
   const navItems = [
+    { label: "Discover", href: "/discover" },
     { label: "Blog", href: "/blog" },
     { label: "Deals", href: "/deals" },
     { label: "About", href: "/about" },
