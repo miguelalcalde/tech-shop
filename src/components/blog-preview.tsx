@@ -19,7 +19,7 @@ export default async function BlogPreview() {
           <h2 className="font-black text-4xl uppercase">Latest from the Blog</h2>
           <Link
             href="/blog"
-            className="bg-black text-white border-4 border-black px-6 py-3 font-black uppercase 
+            className="bg-black text-white border-4 border-black rounded-full px-6 py-3 font-black uppercase 
                        hover:bg-white hover:text-black transition-colors duration-200"
           >
             View All Posts

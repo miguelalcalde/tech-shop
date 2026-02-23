@@ -14,7 +14,7 @@ export default function DealsPage() {
       <main className="flex-grow">
         <section className="border-b-4 border-black bg-yellow-400 py-16">
           <div className="container mx-auto px-4 text-center">
-            <h1 className="font-black text-5xl md:text-6xl uppercase tracking-tight mb-4 border-4 border-black inline-block px-8 py-4 bg-white">
+            <h1 className="font-black text-5xl md:text-6xl uppercase tracking-tight mb-4 border-4 border-black rounded-2xl inline-block px-8 py-4 bg-white">
               Deals
             </h1>
             <p className="font-mono text-lg uppercase mt-6">
@@ -25,7 +25,7 @@ export default function DealsPage() {
 
         <section className="container mx-auto px-4 py-16">
           <div className="text-center">
-            <div className="border-4 border-black p-12 bg-white inline-block">
+            <div className="border-4 border-black rounded-2xl p-12 bg-white inline-block">
               <p className="font-mono text-xl uppercase mb-4">
                 🔥 No Active Deals Right Now
               </p>

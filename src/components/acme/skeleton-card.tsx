@@ -7,13 +7,13 @@ export function SkeletonCard({ className, ...props }: SkeletonCardProps) {
   return (
     <div
       className={cn(
-        "bg-white border-4 border-black p-4 animate-pulse",
+        "bg-white border-4 border-black rounded-2xl p-4 animate-pulse",
         className
       )}
       {...props}
     >
       {/* Image Skeleton */}
-      <div className="relative h-64 mb-4 border-4 border-black bg-gray-200"></div>
+      <div className="relative h-64 mb-4 border-4 border-black rounded-xl bg-gray-200"></div>
 
       {/* Content Skeleton */}
       <div className="space-y-3">

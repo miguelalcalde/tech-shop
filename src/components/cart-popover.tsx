@@ -20,7 +20,7 @@ export default function CartPopover() {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <button
-          className="relative cursor-pointer p-2 hover:bg-yellow-400 transition-colors border-2 border-transparent hover:border-black"
+          className="relative cursor-pointer p-2 hover:bg-yellow-400 transition-colors border-2 border-transparent hover:border-black rounded-full"
           aria-label="Open cart"
         >
           <ShoppingCart className="w-6 h-6" />
@@ -33,11 +33,11 @@ export default function CartPopover() {
       </PopoverTrigger>
 
       <PopoverContent
-        className="w-96 p-0 border-4 border-black rounded-none bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+        className="w-96 p-0 border-4 border-black rounded-2xl bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
         align="end"
         sideOffset={12}
       >
-        <div className="border-b-4 border-black bg-black text-white p-4 flex items-center justify-between">
+        <div className="border-b-4 border-black bg-black text-white p-4 flex items-center justify-between rounded-t-xl">
           <h3 className="font-black text-lg uppercase tracking-tight">
             Your Cart
           </h3>
@@ -57,7 +57,7 @@ export default function CartPopover() {
               Your cart is empty
             </p>
             <Link href="/" onClick={() => setOpen(false)}>
-              <Button className="mt-4 bg-black text-white border-2 border-black px-4 py-2 font-bold uppercase text-sm rounded-none hover:bg-yellow-400 hover:text-black transition-colors">
+              <Button className="mt-4 bg-black text-white border-2 border-black px-4 py-2 font-bold uppercase text-sm rounded-full hover:bg-yellow-400 hover:text-black transition-colors">
                 Shop Now
               </Button>
             </Link>
@@ -85,7 +85,7 @@ export default function CartPopover() {
 
                   <button
                     onClick={() => removeItem(item.id)}
-                    className="p-1.5 bg-red-500 text-white border-2 border-black hover:bg-red-600 transition-colors"
+                    className="p-1.5 bg-red-500 text-white border-2 border-black rounded-lg hover:bg-red-600 transition-colors"
                     aria-label={`Remove ${item.name} from cart`}
                   >
                     <Trash2 className="w-3.5 h-3.5" />
@@ -94,7 +94,7 @@ export default function CartPopover() {
               ))}
             </div>
 
-            <div className="border-t-4 border-black bg-yellow-400 p-4">
+            <div className="border-t-4 border-black bg-yellow-400 p-4 rounded-b-xl">
               <div className="flex justify-between items-center mb-4">
                 <span className="font-bold uppercase text-sm">Total</span>
                 <span className="font-black text-xl">
@@ -108,7 +108,7 @@ export default function CartPopover() {
                   className="flex-1"
                   onClick={() => setOpen(false)}
                 >
-                  <Button className="w-full bg-white text-black border-2 border-black py-2.5 font-bold uppercase text-sm rounded-none hover:bg-gray-100 transition-colors">
+                  <Button className="w-full bg-white text-black border-2 border-black py-2.5 font-bold uppercase text-sm rounded-full hover:bg-gray-100 transition-colors">
                     View Cart
                   </Button>
                 </Link>
@@ -118,7 +118,7 @@ export default function CartPopover() {
                   className="flex-1"
                   onClick={() => setOpen(false)}
                 >
-                  <Button className="w-full bg-black text-white border-2 border-black py-2.5 font-bold uppercase text-sm rounded-none hover:bg-gray-800 transition-colors">
+                  <Button className="w-full bg-black text-white border-2 border-black py-2.5 font-bold uppercase text-sm rounded-full hover:bg-gray-800 transition-colors">
                     Checkout
                   </Button>
                 </Link>
