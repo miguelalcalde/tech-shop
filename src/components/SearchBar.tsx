@@ -20,7 +20,7 @@ export default function SearchBar() {
         placeholder="Search products..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="border-4 border-black px-4 py-2 pr-10 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400 bg-white"
+        className="border-4 border-black rounded-full px-4 py-2 pr-10 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400 bg-white"
       />
       <button
         type="submit"

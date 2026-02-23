@@ -10,7 +10,7 @@ interface BlogCardProps {
 
 function DraftBadge() {
   return (
-    <div className="flex items-center gap-1.5 bg-[#F03E2F] border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+    <div className="flex items-center gap-1.5 bg-[#F03E2F] border-2 border-black rounded-lg px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
       <Icons.Sanity className="w-4 h-4" />
       <span className="font-black text-xs text-white uppercase tracking-wide">
         Draft
@@ -21,7 +21,7 @@ function DraftBadge() {
 
 function LiveBadge() {
   return (
-    <div className="flex items-center gap-1.5 bg-green-500 border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+    <div className="flex items-center gap-1.5 bg-green-500 border-2 border-black rounded-lg px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
       <Icons.Live className="w-3 h-3 text-white" />
       <span className="font-black text-xs text-white uppercase tracking-wide">
         Live
@@ -48,7 +48,7 @@ export default function BlogCard({ post }: BlogCardProps) {
   return (
     <Link href={`/blog/${post.slug}`} className="block h-full">
       <article
-        className="relative bg-white border-4 border-black p-6 transition-all duration-200 
+        className="relative bg-white border-4 border-black rounded-2xl p-6 transition-all duration-200 
                   hover:translate-x-[-8px] hover:translate-y-[-8px] 
                   hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] h-full flex flex-col"
       >
@@ -61,7 +61,7 @@ export default function BlogCard({ post }: BlogCardProps) {
 
         <div className="flex-grow space-y-4">
           <div className="flex items-center gap-3 text-sm font-mono">
-            <span className="bg-yellow-400 border-2 border-black px-2 py-1 font-bold uppercase">
+            <span className="bg-yellow-400 border-2 border-black rounded-lg px-2 py-1 font-bold uppercase">
               {formattedDate}
             </span>
             <span className="text-gray-600">by {post.author}</span>

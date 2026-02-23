@@ -55,7 +55,7 @@ export default async function ProductPage({
       <main className="flex-grow container mx-auto px-4 py-8">
         <Link
           href="/"
-          className="flex items-center text-black hover:opacity-80 mb-6 font-bold uppercase border-4 border-black px-4 py-2 inline-block hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-200"
+          className="flex items-center text-black hover:opacity-80 mb-6 font-bold uppercase border-4 border-black rounded-full px-4 py-2 inline-block hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-200"
         >
           <ArrowLeft className="mr-2 h-5 w-5" />
           Back to Products
@@ -63,7 +63,7 @@ export default async function ProductPage({
 
         <div className="flex flex-col md:flex-row gap-8 mb-12">
           {/* Product Image */}
-          <div className="w-full md:w-1/2 relative h-[500px] bg-white border-4 border-black overflow-hidden">
+          <div className="w-full md:w-1/2 relative h-[500px] bg-white border-4 border-black rounded-2xl overflow-hidden">
             <Image
               src={product.image || "/placeholder-product.jpg"}
               alt={product.name}
@@ -75,12 +75,12 @@ export default async function ProductPage({
           </div>
 
           {/* Product Info */}
-          <div className="w-full md:w-1/2 border-4 border-black p-8 bg-white">
+          <div className="w-full md:w-1/2 border-4 border-black rounded-2xl p-8 bg-white">
             <div className="flex justify-between items-start mb-4">
               <h1 className="font-black text-4xl uppercase tracking-tight flex-1 pr-4">
                 {product.name}
               </h1>
-              <button className="text-black hover:opacity-80 transition-opacity border-4 border-black p-2">
+              <button className="text-black hover:opacity-80 transition-opacity border-4 border-black rounded-xl p-2">
                 <Heart className="w-6 h-6" />
               </button>
             </div>
@@ -102,7 +102,7 @@ export default async function ProductPage({
             <p className="font-mono text-base mb-6">{product.description}</p>
 
             <div className="flex items-baseline gap-4 mb-6">
-              <span className="bg-yellow-400 border-4 border-black px-6 py-3 font-black text-3xl">
+              <span className="bg-yellow-400 border-4 border-black rounded-xl px-6 py-3 font-black text-3xl">
                 ${product.price.toFixed(2)}
               </span>
               {product.originalPrice && product.originalPrice > product.price && (
@@ -112,7 +112,7 @@ export default async function ProductPage({
               )}
             </div>
 
-            <div className="mb-6 border-4 border-black p-4 bg-gray-50">
+            <div className="mb-6 border-4 border-black rounded-xl p-4 bg-gray-50">
               <p className="font-bold uppercase mb-2">
                 Availability:{" "}
                 <span className={product.stock > 0 ? "text-green-600" : "text-red-600"}>
@@ -135,13 +135,13 @@ export default async function ProductPage({
         </div>
 
         {/* Product Details Section */}
-        <div className="mt-12 mb-12 border-4 border-black p-8 bg-white">
+        <div className="mt-12 mb-12 border-4 border-black rounded-2xl p-8 bg-white">
           <h2 className="font-black text-3xl uppercase mb-6 border-b-4 border-black pb-4 inline-block">
             Product Details
           </h2>
           <p className="font-mono text-base mb-6">{product.description}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="border-4 border-black p-6 bg-yellow-400">
+            <div className="border-4 border-black rounded-2xl p-6 bg-yellow-400">
               <h3 className="font-black text-xl uppercase mb-4">Features</h3>
               <ul className="list-disc list-inside space-y-2 font-mono">
                 <li>Premium Quality Materials</li>
@@ -149,7 +149,7 @@ export default async function ProductPage({
                 <li>Warranty Included</li>
               </ul>
             </div>
-            <div className="border-4 border-black p-6 bg-cyan-400">
+            <div className="border-4 border-black rounded-2xl p-6 bg-cyan-400">
               <h3 className="font-black text-xl uppercase mb-4">Specifications</h3>
               <ul className="space-y-2 font-mono">
                 <li>
@@ -169,7 +169,7 @@ export default async function ProductPage({
         {/* Related Products Section */}
         {relatedProducts.length > 0 && (
           <div className="mt-12">
-            <h2 className="font-black text-3xl uppercase mb-8 border-4 border-black inline-block px-8 py-4">
+            <h2 className="font-black text-3xl uppercase mb-8 border-4 border-black rounded-2xl inline-block px-8 py-4">
               You Might Also Like
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

@@ -27,7 +27,7 @@ export default async function Home() {
         {/* Featured Products Section */}
         <section id="products" className="container mx-auto px-4 py-16">
           <div className="mb-12 text-center">
-            <h2 className="font-black text-4xl md:text-5xl uppercase tracking-tight mb-4 border-4 border-black inline-block px-8 py-4">
+            <h2 className="font-black text-4xl md:text-5xl uppercase tracking-tight mb-4 border-4 border-black rounded-2xl inline-block px-8 py-4">
               Featured Products
             </h2>
             <p className="font-mono text-lg uppercase mt-4">
@@ -49,7 +49,7 @@ export default async function Home() {
                   {[1, 2, 3].map((i) => (
                     <div
                       key={i}
-                      className="bg-white border-4 border-black p-6 h-64 animate-pulse"
+                      className="bg-white border-4 border-black rounded-2xl p-6 h-64 animate-pulse"
                     />
                   ))}
                 </div>
@@ -71,7 +71,7 @@ export default async function Home() {
               <input
                 type="email"
                 placeholder="Your email"
-                className="flex-1 border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                className="flex-1 border-4 border-black rounded-full px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400"
               />
               <Button className="bg-black text-white border-4 border-black px-8 py-3 font-black uppercase rounded-full hover:bg-yellow-400 hover:text-black transition-colors">
                 Subscribe

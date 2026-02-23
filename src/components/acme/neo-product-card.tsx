@@ -34,12 +34,12 @@ export function NeoProductCard({
     <div className={cn("h-full", className)}>
       <Link href={productLink} className="block h-full">
         <div
-          className="bg-white border-4 border-black p-4 transition-all duration-200 
+          className="bg-white border-4 border-black rounded-2xl p-4 transition-all duration-200 
                     hover:translate-x-[-8px] hover:translate-y-[-8px] 
                     hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] h-full flex flex-col"
         >
           {/* Product Image */}
-          <div className="relative h-64 mb-4 border-4 border-black overflow-hidden">
+          <div className="relative h-64 mb-4 border-4 border-black rounded-xl overflow-hidden">
             <Image
               src={image || "/placeholder.svg?height=400&width=400"}
               alt={name}
@@ -48,7 +48,7 @@ export function NeoProductCard({
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
             {bestSeller && (
-              <div className="absolute top-2 right-2 bg-yellow-400 border-2 border-black px-2 py-1 font-black text-xs uppercase">
+              <div className="absolute top-2 right-2 bg-yellow-400 border-2 border-black rounded-lg px-2 py-1 font-black text-xs uppercase">
                 Best Seller
               </div>
             )}
@@ -61,7 +61,7 @@ export function NeoProductCard({
                 {name}
               </h3>
               <div className="flex flex-col items-end shrink-0">
-                <span className="bg-yellow-400 border-2 border-black px-3 py-1 font-bold text-lg whitespace-nowrap">
+                <span className="bg-yellow-400 border-2 border-black rounded-lg px-3 py-1 font-bold text-lg whitespace-nowrap">
                   ${price.toFixed(2)}
                 </span>
                 {originalPrice && originalPrice > price && (
