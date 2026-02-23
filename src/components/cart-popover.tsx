@@ -33,7 +33,7 @@ export default function CartPopover() {
       </PopoverTrigger>
 
       <PopoverContent
-        className="w-96 p-0 border-4 border-black rounded-none bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+        className="w-96 p-0 border-4 border-black rounded-full bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
         align="end"
         sideOffset={12}
       >
@@ -57,7 +57,7 @@ export default function CartPopover() {
               Your cart is empty
             </p>
             <Link href="/" onClick={() => setOpen(false)}>
-              <Button className="mt-4 bg-black text-white border-2 border-black px-4 py-2 font-bold uppercase text-sm rounded-none hover:bg-yellow-400 hover:text-black transition-colors">
+              <Button className="mt-4 bg-black text-white border-2 border-black px-4 py-2 font-bold uppercase text-sm rounded-full hover:bg-yellow-400 hover:text-black transition-colors">
                 Shop Now
               </Button>
             </Link>
@@ -108,7 +108,7 @@ export default function CartPopover() {
                   className="flex-1"
                   onClick={() => setOpen(false)}
                 >
-                  <Button className="w-full bg-white text-black border-2 border-black py-2.5 font-bold uppercase text-sm rounded-none hover:bg-gray-100 transition-colors">
+                  <Button className="w-full bg-white text-black border-2 border-black py-2.5 font-bold uppercase text-sm rounded-full hover:bg-gray-100 transition-colors">
                     View Cart
                   </Button>
                 </Link>
@@ -118,7 +118,7 @@ export default function CartPopover() {
                   className="flex-1"
                   onClick={() => setOpen(false)}
                 >
-                  <Button className="w-full bg-black text-white border-2 border-black py-2.5 font-bold uppercase text-sm rounded-none hover:bg-gray-800 transition-colors">
+                  <Button className="w-full bg-black text-white border-2 border-black py-2.5 font-bold uppercase text-sm rounded-full hover:bg-gray-800 transition-colors">
                     Checkout
                   </Button>
                 </Link>

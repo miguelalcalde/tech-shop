@@ -24,7 +24,7 @@ export default function CartContent() {
         <div className="border-4 border-black p-12 text-center">
           <p className="font-mono text-xl uppercase mb-6">Your cart is empty.</p>
           <Link href="/">
-            <Button className="bg-black text-white border-4 border-black px-8 py-4 font-black uppercase rounded-none hover:bg-yellow-400 hover:text-black transition-colors">
+            <Button className="bg-black text-white border-4 border-black px-8 py-4 font-black uppercase rounded-full hover:bg-yellow-400 hover:text-black transition-colors">
               Continue Shopping
             </Button>
           </Link>
@@ -46,7 +46,7 @@ export default function CartContent() {
                 </div>
                 <Button
                   onClick={() => removeItem(item.id)}
-                  className="bg-red-500 text-white border-4 border-black px-4 py-2 font-black uppercase rounded-none hover:bg-red-600 transition-colors"
+                  className="bg-red-500 text-white border-4 border-black px-4 py-2 font-black uppercase rounded-full hover:bg-red-600 transition-colors"
                 >
                   <Trash2 className="h-5 w-5" />
                 </Button>
@@ -61,13 +61,13 @@ export default function CartContent() {
           <div className="flex gap-4">
             <Button
               onClick={clearCart}
-              className="bg-red-500 text-white border-4 border-black px-8 py-4 font-black uppercase rounded-none hover:bg-red-600 transition-colors"
+              className="bg-red-500 text-white border-4 border-black px-8 py-4 font-black uppercase rounded-full hover:bg-red-600 transition-colors"
             >
               Clear Cart
             </Button>
             <Button
               onClick={handleNextClick}
-              className="bg-black text-white border-4 border-black px-8 py-4 font-black uppercase rounded-none hover:bg-yellow-400 hover:text-black transition-colors"
+              className="bg-black text-white border-4 border-black px-8 py-4 font-black uppercase rounded-full hover:bg-yellow-400 hover:text-black transition-colors"
             >
               Checkout
             </Button>
