@@ -20,7 +20,7 @@ export default async function Header() {
       navItems={navItems}
       showBanner={showBanner}
       bannerContent={showBanner ? <DiscountBanner /> : null}
-      className="bg-secondary"
+      className=""
       rightContent={
         <>
           <SearchBar />

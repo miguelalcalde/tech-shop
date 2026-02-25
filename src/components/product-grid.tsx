@@ -24,7 +24,7 @@ async function CachedProductGrid() {
 
   if (!isSuccess) {
     return (
-      <div className="p-4 font-bold text-center text-red-500 uppercase border-4 border-red-500">
+      <div className="p-4 text-center text-destructive border border-destructive/30 rounded-xl bg-destructive/5">
         {message}
       </div>
     )

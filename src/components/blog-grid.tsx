@@ -9,7 +9,7 @@ export default async function BlogGrid({ posts }: BlogGridProps) {
   if (posts.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="font-mono text-lg text-gray-600">
+        <p className="text-muted-foreground">
           No blog posts available yet. Check back soon!
         </p>
       </div>

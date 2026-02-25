@@ -60,42 +60,42 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   })
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-background">
       <Header />
 
       <main className="flex-grow">
         <article>
-          <header className="py-16 bg-yellow-400 border-b-4 border-black">
+          <header className="py-16 bg-secondary border-b border-border">
             <div className="container px-4 mx-auto max-w-4xl">
               <Link
                 href="/blog"
-                className="inline-flex items-center mb-6 text-sm font-black uppercase hover:underline"
+                className="inline-flex items-center mb-6 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
-                ← Back to Blog
+                Back to Blog
               </Link>
 
               <h1
-                className="mb-6 text-4xl font-black tracking-tight uppercase md:text-5xl"
+                className="mb-6 text-3xl font-semibold tracking-tight md:text-4xl text-foreground"
                 data-sanity-edit-target
               >
                 {post.title}
               </h1>
 
-              <div className="flex gap-4 items-center font-mono text-sm">
-                <span className="px-3 py-1 font-bold bg-white border-2 border-black">
+              <div className="flex gap-4 items-center text-sm">
+                <span className="text-muted-foreground">
                   {formattedDate}
                 </span>
-                <span data-sanity-edit-target>by {post.author}</span>
+                <span className="text-muted-foreground/60" data-sanity-edit-target>by {post.author}</span>
               </div>
             </div>
           </header>
 
           <div className="container px-4 py-16 mx-auto max-w-4xl">
-            <div className="p-8 bg-white border-4 border-black md:p-12">
+            <div className="p-8 bg-card border border-border rounded-xl md:p-12">
               {/* Extract section for Edit Mode */}
               {post.extract && (
                 <div
-                  className="pb-8 mb-8 text-xl font-bold border-b-4 border-black"
+                  className="pb-8 mb-8 text-lg text-foreground/80 border-b border-border leading-relaxed"
                   data-sanity-edit-target
                 >
                   {post.extract}
@@ -104,7 +104,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
               {/* Body content with field ID for Edit Mode */}
               <div
-                className="max-w-none font-mono prose prose-lg"
+                className="max-w-none prose prose-lg text-foreground"
                 data-sanity-edit-target
               >
                 {post.body
@@ -114,7 +114,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                       return (
                         <h2
                           key={index}
-                          className="pb-2 mt-8 mb-4 text-2xl font-black uppercase border-b-4 border-black"
+                          className="pb-2 mt-8 mb-4 text-xl font-semibold border-b border-border text-foreground"
                         >
                           {paragraph.replace("## ", "")}
                         </h2>
@@ -128,7 +128,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                       return (
                         <h3
                           key={index}
-                          className="mt-6 mb-3 text-xl font-black uppercase"
+                          className="mt-6 mb-3 text-lg font-medium text-foreground"
                         >
                           {paragraph.replace(/\*\*/g, "")}
                         </h3>
@@ -145,7 +145,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                           {items.map((item: string, i: number) => (
                             <li
                               key={i}
-                              className="pl-6 relative before:content-['→'] before:absolute before:left-0 before:font-bold"
+                              className="pl-5 relative text-muted-foreground before:content-['-'] before:absolute before:left-0 before:text-foreground/30"
                             >
                               {item.replace(/^[-*]\s/, "")}
                             </li>
@@ -161,8 +161,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         <ol key={index} className="my-4 space-y-2 list-none">
                           {items.map((item: string, i: number) => {
                             return (
-                              <li key={i} className="relative pl-8">
-                                <span className="flex absolute left-0 justify-center items-center w-6 h-6 text-sm font-black bg-yellow-400 border-2 border-black">
+                              <li key={i} className="relative pl-8 text-muted-foreground">
+                                <span className="flex absolute left-0 justify-center items-center w-6 h-6 text-xs font-medium bg-muted text-muted-foreground rounded-md">
                                   {i + 1}
                                 </span>
                                 {item.replace(/^\d+\.\s+/g, "")}
@@ -174,13 +174,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     }
 
                     return (
-                      <p key={index} className="my-4 leading-relaxed">
+                      <p key={index} className="my-4 leading-relaxed text-muted-foreground">
                         {paragraph
                           .split(/(\*\*[^*]+\*\*)/)
                           .map((part: string, i: number) => {
                             if (part.startsWith("**") && part.endsWith("**")) {
                               return (
-                                <strong key={i} className="font-bold">
+                                <strong key={i} className="font-medium text-foreground">
                                   {part.replace(/\*\*/g, "")}
                                 </strong>
                               )
@@ -196,9 +196,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <div className="mt-12 text-center">
               <Link
                 href="/blog"
-                className="inline-block px-8 py-4 font-black text-white uppercase bg-black border-4 border-black transition-colors duration-200 hover:bg-yellow-400 hover:text-black"
+                className="inline-block px-6 py-2.5 font-medium text-sm text-primary-foreground bg-primary rounded-lg transition-colors duration-200 hover:bg-primary/90"
               >
-                ← Back to All Posts
+                Back to All Posts
               </Link>
             </div>
           </div>

@@ -10,9 +10,9 @@ interface BlogCardProps {
 
 function DraftBadge() {
   return (
-    <div className="flex items-center gap-1.5 bg-[#F03E2F] border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-      <Icons.Sanity className="w-4 h-4" />
-      <span className="font-black text-xs text-white uppercase tracking-wide">
+    <div className="flex items-center gap-1.5 bg-destructive text-destructive-foreground px-2 py-1 rounded-md shadow-sm">
+      <Icons.Sanity className="w-3.5 h-3.5" />
+      <span className="text-[10px] font-medium tracking-wide">
         Draft
       </span>
     </div>
@@ -21,9 +21,9 @@ function DraftBadge() {
 
 function LiveBadge() {
   return (
-    <div className="flex items-center gap-1.5 bg-green-500 border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-      <Icons.Live className="w-3 h-3 text-white" />
-      <span className="font-black text-xs text-white uppercase tracking-wide">
+    <div className="flex items-center gap-1.5 bg-primary text-primary-foreground px-2 py-1 rounded-md shadow-sm">
+      <Icons.Live className="w-2.5 h-2.5" />
+      <span className="text-[10px] font-medium tracking-wide">
         Live
       </span>
     </div>
@@ -48,37 +48,36 @@ export default function BlogCard({ post }: BlogCardProps) {
   return (
     <Link href={`/blog/${post.slug}`} className="block h-full">
       <article
-        className="relative bg-white border-4 border-black p-6 transition-all duration-200 
-                  hover:translate-x-[-8px] hover:translate-y-[-8px] 
-                  hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] h-full flex flex-col"
+        className="relative bg-card border border-border rounded-xl p-6 transition-all duration-200 
+                  hover:shadow-md hover:border-foreground/20 h-full flex flex-col"
       >
         {showBadges && (isDraftDocument || hasPublishedVersion) && (
-          <div className="absolute -top-3 -right-3 z-10 flex items-center gap-1">
+          <div className="absolute -top-2 -right-2 z-10 flex items-center gap-1">
             {hasPublishedVersion && <LiveBadge />}
             {isDraftDocument && <DraftBadge />}
           </div>
         )}
 
-        <div className="flex-grow space-y-4">
-          <div className="flex items-center gap-3 text-sm font-mono">
-            <span className="bg-yellow-400 border-2 border-black px-2 py-1 font-bold uppercase">
+        <div className="flex-grow space-y-3">
+          <div className="flex items-center gap-3 text-sm">
+            <span className="text-muted-foreground text-xs">
               {formattedDate}
             </span>
-            <span className="text-gray-600">by {post.author}</span>
+            <span className="text-muted-foreground/60 text-xs">by {post.author}</span>
           </div>
 
-          <h3 className="font-black text-xl uppercase tracking-tight line-clamp-2">
+          <h3 className="font-medium text-base text-foreground line-clamp-2">
             {post.title}
           </h3>
 
-          <p className="font-mono text-sm text-gray-700 line-clamp-3">
+          <p className="text-sm text-muted-foreground line-clamp-3">
             {post.extract}
           </p>
         </div>
 
-        <div className="mt-6 pt-4 border-t-2 border-black">
-          <span className="font-black text-sm uppercase tracking-wide hover:text-yellow-600 transition-colors">
-            Read More →
+        <div className="mt-4 pt-4 border-t border-border">
+          <span className="text-sm font-medium text-foreground hover:text-muted-foreground transition-colors">
+            Read More
           </span>
         </div>
       </article>

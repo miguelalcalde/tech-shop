@@ -15,23 +15,23 @@ export default async function Home() {
 
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="border-b-4 border-black">
+        <section className="border-b border-border">
           <Hero
-            title="TECH SHOP"
-            subtitle="BRUTALIST DESIGN MEETS CUTTING-EDGE TECHNOLOGY"
-            ctaText="SHOP NOW"
+            title="Tech Shop"
+            subtitle="Beautifully designed technology, curated for you. Discover our latest collection of premium gadgets and accessories."
+            ctaText="Shop Now"
             ctaHref="#products"
           />
         </section>
 
         {/* Featured Products Section */}
         <section id="products" className="container mx-auto px-4 py-16">
-          <div className="mb-12 text-center">
-            <h2 className="font-black text-4xl md:text-5xl uppercase tracking-tight mb-4 border-4 border-black inline-block px-8 py-4">
+          <div className="mb-10 text-center">
+            <h2 className="font-semibold text-2xl md:text-3xl tracking-tight mb-3 text-foreground">
               Featured Products
             </h2>
-            <p className="font-mono text-lg uppercase mt-4">
-              Discover Our Latest Tech Collection
+            <p className="text-muted-foreground text-base">
+              Discover our latest tech collection
             </p>
           </div>
           <ProductGrid />
@@ -40,16 +40,16 @@ export default async function Home() {
         {/* Blog Preview Section */}
         <Suspense
           fallback={
-            <section className="bg-yellow-400 border-y-4 border-black py-16">
+            <section className="bg-secondary border-y border-border py-16">
               <div className="container mx-auto px-4">
-                <h2 className="font-black text-4xl uppercase mb-12">
+                <h2 className="font-semibold text-2xl mb-10 text-foreground">
                   Latest from the Blog
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {[1, 2, 3].map((i) => (
                     <div
                       key={i}
-                      className="bg-white border-4 border-black p-6 h-64 animate-pulse"
+                      className="bg-card border border-border rounded-xl p-6 h-64 animate-pulse"
                     />
                   ))}
                 </div>
@@ -61,19 +61,19 @@ export default async function Home() {
         </Suspense>
 
         {/* Newsletter CTA */}
-        <section className="border-y-4 border-black py-16">
+        <section className="border-y border-border py-16">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="font-black text-4xl uppercase mb-4">Stay Updated</h2>
-            <p className="font-mono text-lg mb-8">
+            <h2 className="font-semibold text-2xl mb-3 text-foreground">Stay Updated</h2>
+            <p className="text-muted-foreground mb-8">
               Get the latest deals and tech news delivered to your inbox
             </p>
-            <div className="max-w-md mx-auto flex gap-4">
+            <div className="max-w-md mx-auto flex gap-3">
               <input
                 type="email"
                 placeholder="Your email"
-                className="flex-1 border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                className="flex-1 border border-border rounded-lg px-4 py-2.5 text-sm bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30 transition-all"
               />
-              <Button className="bg-black text-white border-4 border-black px-8 py-3 font-black uppercase rounded-none hover:bg-yellow-400 hover:text-black transition-colors">
+              <Button className="bg-primary text-primary-foreground px-6 py-2.5 font-medium text-sm rounded-lg hover:bg-primary/90 transition-colors">
                 Subscribe
               </Button>
             </div>

@@ -34,10 +34,10 @@ export default function ShippingPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Shipping Information</h1>
-      <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
-        <div className="mb-4">
-          <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
+      <h1 className="text-2xl font-semibold mb-6 text-foreground">Shipping Information</h1>
+      <form onSubmit={handleSubmit} className="max-w-lg mx-auto space-y-4">
+        <div>
+          <label htmlFor="fullName" className="block text-sm text-muted-foreground mb-1.5">
             Full Name
           </label>
           <input
@@ -47,11 +47,11 @@ export default function ShippingPage() {
             value={formData.fullName}
             onChange={handleChange}
             required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="w-full border border-border rounded-lg px-4 py-2.5 text-sm bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30 transition-all"
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="addressLine1" className="block text-sm font-medium text-gray-700">
+        <div>
+          <label htmlFor="addressLine1" className="block text-sm text-muted-foreground mb-1.5">
             Address Line 1
           </label>
           <input
@@ -61,11 +61,11 @@ export default function ShippingPage() {
             value={formData.addressLine1}
             onChange={handleChange}
             required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="w-full border border-border rounded-lg px-4 py-2.5 text-sm bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30 transition-all"
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="addressLine2" className="block text-sm font-medium text-gray-700">
+        <div>
+          <label htmlFor="addressLine2" className="block text-sm text-muted-foreground mb-1.5">
             Address Line 2
           </label>
           <input
@@ -74,11 +74,11 @@ export default function ShippingPage() {
             name="addressLine2"
             value={formData.addressLine2}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="w-full border border-border rounded-lg px-4 py-2.5 text-sm bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30 transition-all"
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+        <div>
+          <label htmlFor="city" className="block text-sm text-muted-foreground mb-1.5">
             City
           </label>
           <input
@@ -88,11 +88,11 @@ export default function ShippingPage() {
             value={formData.city}
             onChange={handleChange}
             required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="w-full border border-border rounded-lg px-4 py-2.5 text-sm bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30 transition-all"
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="region" className="block text-sm font-medium text-gray-700">
+        <div>
+          <label htmlFor="region" className="block text-sm text-muted-foreground mb-1.5">
             State/Province/Region
           </label>
           <input
@@ -102,11 +102,11 @@ export default function ShippingPage() {
             value={formData.region}
             onChange={handleChange}
             required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="w-full border border-border rounded-lg px-4 py-2.5 text-sm bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30 transition-all"
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700">
+        <div>
+          <label htmlFor="postalCode" className="block text-sm text-muted-foreground mb-1.5">
             Postal Code
           </label>
           <input
@@ -116,11 +116,11 @@ export default function ShippingPage() {
             value={formData.postalCode}
             onChange={handleChange}
             required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="w-full border border-border rounded-lg px-4 py-2.5 text-sm bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30 transition-all"
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+        <div>
+          <label htmlFor="country" className="block text-sm text-muted-foreground mb-1.5">
             Country
           </label>
           <select
@@ -129,7 +129,7 @@ export default function ShippingPage() {
             value={formData.country}
             onChange={handleChange}
             required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="w-full border border-border rounded-lg px-4 py-2.5 text-sm bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-ring/30 transition-all"
           >
             <option value="">Select a country</option>
             <option value="USA">United States</option>
@@ -143,10 +143,10 @@ export default function ShippingPage() {
             <option value="Greece">Greece</option>
           </select>
         </div>
-        <div className="mt-6">
+        <div className="pt-2">
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
+            className="w-full bg-primary text-primary-foreground py-2.5 px-4 rounded-lg font-medium text-sm hover:bg-primary/90 transition-colors"
           >
             Continue to Payment
           </button>

@@ -28,7 +28,7 @@ export function Header({
   return (
     <header
       className={cn(
-        "bg-white border-b-4 border-black sticky top-0 z-50",
+        "bg-card border-b border-border sticky top-0 z-50 backdrop-blur-sm bg-card/90",
         className,
       )}
       {...props}
@@ -39,19 +39,19 @@ export function Header({
           {/* Logo */}
           <Link
             href={logoHref}
-            className="font-black text-3xl uppercase tracking-tight hover:opacity-80 transition-opacity"
+            className="font-semibold text-xl tracking-tight text-foreground hover:text-muted-foreground transition-colors"
           >
             {logo || logoText}
           </Link>
 
           {/* Navigation */}
           {navItems.length > 0 && (
-            <nav className="hidden md:flex items-center space-x-6">
+            <nav className="hidden md:flex items-center gap-6">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="font-bold uppercase text-sm hover:underline transition-all"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {item.label}
                 </Link>
@@ -61,7 +61,7 @@ export function Header({
 
           {/* Right Content (Search, Cart, etc.) */}
           {rightContent && (
-            <div className="flex items-center gap-4">{rightContent}</div>
+            <div className="flex items-center gap-3">{rightContent}</div>
           )}
         </div>
       </div>

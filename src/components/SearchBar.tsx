@@ -20,13 +20,13 @@ export default function SearchBar() {
         placeholder="Search products..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="border-4 border-black px-4 py-2 pr-10 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400 bg-white"
+        className="border border-border rounded-lg px-4 py-2 pr-10 text-sm bg-muted/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30 transition-all"
       />
       <button
         type="submit"
-        className="absolute right-2 top-1/2 transform -translate-y-1/2 hover:opacity-80"
+        className="absolute right-2.5 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
       >
-        <Search className="h-5 w-5 text-black" />
+        <Search className="h-4 w-4" />
       </button>
     </form>
   )

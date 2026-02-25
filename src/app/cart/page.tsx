@@ -4,7 +4,7 @@ import CartContent from "./_components/cart-content"
 
 export default function CartPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-background">
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
         <CartContent />

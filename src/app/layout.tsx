@@ -2,7 +2,9 @@ import { cn } from "@/lib/utils"
 import "./globals.css"
 import { VercelToolbar } from "@vercel/toolbar/next"
 
-import { GeistSans } from "geist/font/sans"
+import { Inter } from "next/font/google"
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 
 export const metadata = {
   title: "Tech Shop",
@@ -19,7 +21,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={cn("bg-secondary", GeistSans.className)}>
+      <body className={cn("bg-background font-sans", inter.variable)}>
         {shouldInjectToolbar && <VercelToolbar />}
         <div className="toolbar-content-container">{children}</div>
       </body>

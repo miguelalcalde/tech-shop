@@ -19,7 +19,7 @@ const Button = React.forwardRef<HTMLButtonElement, SimpleButtonProps>(
   ({ icon: Icon, className, children, ...props }, ref) => {
     return (
       <UIButton
-        className={cn("flex items-center gap-2 bg-blue-600", className)}
+        className={cn("flex items-center gap-2", className)}
         ref={ref}
         {...props}
       >

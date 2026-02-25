@@ -13,14 +13,14 @@ export default async function BlogPreview() {
   const latestPosts = posts.slice(0, 3)
 
   return (
-    <section className="bg-yellow-400 border-y-4 border-black py-16">
+    <section className="bg-secondary border-y border-border py-16">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between mb-12">
-          <h2 className="font-black text-4xl uppercase">Latest from the Blog</h2>
+        <div className="flex items-center justify-between mb-10">
+          <h2 className="font-semibold text-2xl text-foreground">Latest from the Blog</h2>
           <Link
             href="/blog"
-            className="bg-black text-white border-4 border-black px-6 py-3 font-black uppercase 
-                       hover:bg-white hover:text-black transition-colors duration-200"
+            className="bg-primary text-primary-foreground px-5 py-2.5 rounded-lg font-medium text-sm
+                       hover:bg-primary/90 transition-colors duration-200"
           >
             View All Posts
           </Link>
