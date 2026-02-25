@@ -12,7 +12,7 @@ export default function AboutPage() {
       <Header />
 
       <main className="flex-grow">
-        <section className="border-b-4 border-black bg-yellow-400 py-16">
+        <section className="border-b-4 border-black bg-cyan-400 py-16">
           <div className="container mx-auto px-4 text-center">
             <h1 className="font-black text-5xl md:text-6xl uppercase tracking-tight mb-4 border-4 border-black inline-block px-8 py-4 bg-white">
               About Us
@@ -60,7 +60,7 @@ export default function AboutPage() {
               </ul>
             </div>
 
-            <div className="border-4 border-black p-8 bg-yellow-400">
+            <div className="border-4 border-black p-8 bg-cyan-400">
               <h2 className="font-black text-2xl uppercase mb-4 border-b-4 border-black pb-4">
                 Get In Touch
               </h2>

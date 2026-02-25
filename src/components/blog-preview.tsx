@@ -13,7 +13,7 @@ export default async function BlogPreview() {
   const latestPosts = posts.slice(0, 3)
 
   return (
-    <section className="bg-yellow-400 border-y-4 border-black py-16">
+    <section className="bg-cyan-400 border-y-4 border-black py-16">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between mb-12">
           <h2 className="font-black text-4xl uppercase">Latest from the Blog</h2>

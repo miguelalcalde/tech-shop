@@ -47,7 +47,7 @@ export default function CheckoutContent() {
           <ShoppingBag className="w-16 h-16 mx-auto mb-6 text-gray-400" />
           <p className="font-mono text-xl uppercase mb-6">Your cart is empty.</p>
           <Link href="/">
-            <Button className="bg-black text-white border-4 border-black px-8 py-4 font-black uppercase rounded-none hover:bg-yellow-400 hover:text-black transition-colors">
+            <Button className="bg-black text-white border-4 border-black px-8 py-4 font-black uppercase rounded-lg hover:bg-cyan-400 hover:text-black transition-colors">
               Continue Shopping
             </Button>
           </Link>
@@ -67,7 +67,7 @@ export default function CheckoutContent() {
                   <input
                     type="email"
                     placeholder="your@email.com"
-                    className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                    className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-cyan-400"
                   />
                 </div>
                 <div>
@@ -75,7 +75,7 @@ export default function CheckoutContent() {
                   <input
                     type="tel"
                     placeholder="+1 (555) 000-0000"
-                    className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                    className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-cyan-400"
                   />
                 </div>
               </div>
@@ -94,7 +94,7 @@ export default function CheckoutContent() {
                     <input
                       type="text"
                       placeholder="John"
-                      className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                      className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-cyan-400"
                     />
                   </div>
                   <div>
@@ -102,7 +102,7 @@ export default function CheckoutContent() {
                     <input
                       type="text"
                       placeholder="Doe"
-                      className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                      className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-cyan-400"
                     />
                   </div>
                 </div>
@@ -111,7 +111,7 @@ export default function CheckoutContent() {
                   <input
                     type="text"
                     placeholder="123 Main Street"
-                    className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                    className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-cyan-400"
                   />
                 </div>
                 <div>
@@ -121,7 +121,7 @@ export default function CheckoutContent() {
                   <input
                     type="text"
                     placeholder="Apt 4B"
-                    className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                    className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-cyan-400"
                   />
                 </div>
                 <div className="grid grid-cols-3 gap-4">
@@ -130,7 +130,7 @@ export default function CheckoutContent() {
                     <input
                       type="text"
                       placeholder="New York"
-                      className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                      className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-cyan-400"
                     />
                   </div>
                   <div>
@@ -138,7 +138,7 @@ export default function CheckoutContent() {
                     <input
                       type="text"
                       placeholder="NY"
-                      className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                      className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-cyan-400"
                     />
                   </div>
                   <div>
@@ -146,7 +146,7 @@ export default function CheckoutContent() {
                     <input
                       type="text"
                       placeholder="10001"
-                      className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                      className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-cyan-400"
                     />
                   </div>
                 </div>
@@ -165,7 +165,7 @@ export default function CheckoutContent() {
                   <input
                     type="text"
                     placeholder="4242 4242 4242 4242"
-                    className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                    className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-cyan-400"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
@@ -174,7 +174,7 @@ export default function CheckoutContent() {
                     <input
                       type="text"
                       placeholder="MM/YY"
-                      className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                      className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-cyan-400"
                     />
                   </div>
                   <div>
@@ -182,7 +182,7 @@ export default function CheckoutContent() {
                     <input
                       type="text"
                       placeholder="123"
-                      className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                      className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-cyan-400"
                     />
                   </div>
                 </div>
@@ -191,7 +191,7 @@ export default function CheckoutContent() {
                   <input
                     type="text"
                     placeholder="John Doe"
-                    className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400"
+                    className="w-full border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-cyan-400"
                   />
                 </div>
               </div>
@@ -239,7 +239,7 @@ export default function CheckoutContent() {
                 </div>
               </div>
 
-              <div className="border-t-4 border-black bg-yellow-400 p-4">
+              <div className="border-t-4 border-black bg-cyan-400 p-4">
                 <div className="flex justify-between items-center mb-4">
                   <span className="font-black text-lg uppercase">Total</span>
                   <span className="font-black text-2xl">${total.toFixed(2)}</span>
@@ -248,7 +248,7 @@ export default function CheckoutContent() {
                 <Button
                   onClick={handlePlaceOrder}
                   disabled={isProcessing}
-                  className="w-full bg-black text-white border-4 border-black py-4 font-black uppercase rounded-none hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-black text-white border-4 border-black py-4 font-black uppercase rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isProcessing ? "Processing..." : "Place Order"}
                 </Button>

@@ -61,7 +61,7 @@ export default function BlogCard({ post }: BlogCardProps) {
 
         <div className="flex-grow space-y-4">
           <div className="flex items-center gap-3 text-sm font-mono">
-            <span className="bg-yellow-400 border-2 border-black px-2 py-1 font-bold uppercase">
+            <span className="bg-cyan-400 border-2 border-black px-2 py-1 font-bold uppercase">
               {formattedDate}
             </span>
             <span className="text-gray-600">by {post.author}</span>
@@ -77,7 +77,7 @@ export default function BlogCard({ post }: BlogCardProps) {
         </div>
 
         <div className="mt-6 pt-4 border-t-2 border-black">
-          <span className="font-black text-sm uppercase tracking-wide hover:text-yellow-600 transition-colors">
+          <span className="font-black text-sm uppercase tracking-wide hover:text-cyan-600 transition-colors">
             Read More →
           </span>
         </div>
