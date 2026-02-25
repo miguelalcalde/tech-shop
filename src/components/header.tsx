@@ -1,6 +1,7 @@
 import { Header as UIHeader } from "@/components/acme"
 import SearchBar from "./SearchBar"
 import CartPopover from "./cart-popover"
+import LoginDialog from "./login-dialog"
 import { bannerFlag } from "@/flags"
 import DiscountBanner from "./discount-banner"
 
@@ -24,6 +25,7 @@ export default async function Header() {
       rightContent={
         <>
           <SearchBar />
+          <LoginDialog />
           <CartPopover />
         </>
       }
