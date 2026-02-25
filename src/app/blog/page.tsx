@@ -42,7 +42,7 @@ export default async function BlogPage() {
       <Header />
 
       <main className="flex-grow">
-        <section className="border-b-4 border-black bg-yellow-400 py-16">
+        <section className="border-b-4 border-black bg-cyan-400 py-16">
           <div className="container mx-auto px-4 text-center">
             <h1 className="font-black text-5xl md:text-6xl uppercase tracking-tight mb-4 border-4 border-black inline-block px-8 py-4 bg-white">
               Tech Blog

@@ -56,7 +56,7 @@ export function Footer({
   return (
     <footer
       className={cn(
-        "text-white bg-black border-t-4 border-yellow-400",
+        "text-white bg-black border-t-4 border-cyan-400",
         className
       )}
       {...props}
@@ -65,7 +65,7 @@ export function Footer({
         <div className="grid grid-cols-1 gap-8 mb-8 md:grid-cols-3">
           {sections.map((section, index) => (
             <div key={index}>
-              <h3 className="inline-block pb-2 mb-4 text-lg font-black uppercase border-b-2 border-yellow-400">
+              <h3 className="inline-block pb-2 mb-4 text-lg font-black uppercase border-b-2 border-cyan-400">
                 {section.title}
               </h3>
               <ul className="space-y-2">
@@ -73,7 +73,7 @@ export function Footer({
                   <li key={index}>
                     <Link
                       href={link.href}
-                      className="font-mono text-sm uppercase transition-colors hover:text-yellow-400"
+                      className="font-mono text-sm uppercase transition-colors hover:text-cyan-400"
                     >
                       {link.label}
                     </Link>
@@ -83,7 +83,7 @@ export function Footer({
             </div>
           ))}
         </div>
-        <div className="pt-8 text-center border-t-4 border-yellow-400">
+        <div className="pt-8 text-center border-t-4 border-cyan-400">
           <p className="text-sm font-black uppercase">{copyrightText}</p>
         </div>
       </div>

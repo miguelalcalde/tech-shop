@@ -48,7 +48,7 @@ export function NeoProductCard({
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
             {bestSeller && (
-              <div className="absolute top-2 right-2 bg-yellow-400 border-2 border-black px-2 py-1 font-black text-xs uppercase">
+              <div className="absolute top-2 right-2 bg-cyan-400 border-2 border-black px-2 py-1 font-black text-xs uppercase">
                 Best Seller
               </div>
             )}
@@ -61,7 +61,7 @@ export function NeoProductCard({
                 {name}
               </h3>
               <div className="flex flex-col items-end shrink-0">
-                <span className="bg-yellow-400 border-2 border-black px-3 py-1 font-bold text-lg whitespace-nowrap">
+                <span className="bg-cyan-400 border-2 border-black px-3 py-1 font-bold text-lg whitespace-nowrap">
                   ${price.toFixed(2)}
                 </span>
                 {originalPrice && originalPrice > price && (
@@ -83,7 +83,7 @@ export function NeoProductCard({
                 }}
                 className="w-full bg-black text-white border-2 border-black 
                           hover:bg-white hover:text-black font-bold text-lg py-6 
-                          transition-colors duration-200 rounded-none uppercase mt-auto"
+                          transition-colors duration-200 rounded-lg uppercase mt-auto"
               >
                 Add to Cart
               </Button>

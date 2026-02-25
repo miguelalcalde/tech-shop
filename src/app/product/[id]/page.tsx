@@ -102,7 +102,7 @@ export default async function ProductPage({
             <p className="font-mono text-base mb-6">{product.description}</p>
 
             <div className="flex items-baseline gap-4 mb-6">
-              <span className="bg-yellow-400 border-4 border-black px-6 py-3 font-black text-3xl">
+              <span className="bg-cyan-400 border-4 border-black px-6 py-3 font-black text-3xl">
                 ${product.price.toFixed(2)}
               </span>
               {product.originalPrice && product.originalPrice > product.price && (
@@ -141,7 +141,7 @@ export default async function ProductPage({
           </h2>
           <p className="font-mono text-base mb-6">{product.description}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="border-4 border-black p-6 bg-yellow-400">
+            <div className="border-4 border-black p-6 bg-cyan-400">
               <h3 className="font-black text-xl uppercase mb-4">Features</h3>
               <ul className="list-disc list-inside space-y-2 font-mono">
                 <li>Premium Quality Materials</li>

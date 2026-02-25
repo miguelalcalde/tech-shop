@@ -24,9 +24,9 @@ export function Hero({
 }: HeroProps) {
   const CtaButton = (
     <Button
-      className="bg-yellow-400 text-black border-4 border-black px-8 py-4 
-                font-black text-xl uppercase rounded-none
-                hover:bg-black hover:text-yellow-400 hover:translate-x-[-4px] hover:translate-y-[-4px]
+      className="bg-cyan-400 text-black border-4 border-black px-8 py-4 
+                font-black text-xl uppercase rounded-lg
+                hover:bg-black hover:text-cyan-400 hover:translate-x-[-4px] hover:translate-y-[-4px]
                 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-200"
       onClick={onCtaClick}
     >
@@ -63,10 +63,10 @@ export function Hero({
 
           {/* Geometric Shapes */}
           <div className="relative h-64 md:h-96">
-            <div className="absolute top-0 left-0 w-32 h-32 bg-yellow-400 border-4 border-black"></div>
+            <div className="absolute top-0 left-0 w-32 h-32 bg-cyan-400 border-4 border-black"></div>
             <div className="absolute top-8 left-8 w-32 h-32 bg-cyan-400 border-4 border-black"></div>
             <div className="absolute top-16 left-16 w-32 h-32 bg-black border-4 border-black"></div>
-            <div className="absolute bottom-0 right-0 w-24 h-24 bg-yellow-400 border-4 border-black rotate-45"></div>
+            <div className="absolute bottom-0 right-0 w-24 h-24 bg-cyan-400 border-4 border-black rotate-45"></div>
             <div className="absolute bottom-8 right-8 w-24 h-24 bg-cyan-400 border-4 border-black rotate-45"></div>
           </div>
         </div>

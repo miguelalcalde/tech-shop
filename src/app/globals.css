@@ -78,7 +78,7 @@ body {
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+    --radius: 9999px;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -88,7 +88,7 @@ body {
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
     --tag-discount: 346 84% 61%;
-    --tag-bestseller: 38 95% 64%;
+    --tag-bestseller: 187 72% 56%;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -124,7 +124,7 @@ body {
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
     --tag-discount: 346 84% 61%;
-    --tag-bestseller: 38 95% 64%;
+    --tag-bestseller: 187 72% 56%;
   }
 }
 

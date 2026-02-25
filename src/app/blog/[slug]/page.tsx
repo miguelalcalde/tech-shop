@@ -65,7 +65,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
       <main className="flex-grow">
         <article>
-          <header className="py-16 bg-yellow-400 border-b-4 border-black">
+          <header className="py-16 bg-cyan-400 border-b-4 border-black">
             <div className="container px-4 mx-auto max-w-4xl">
               <Link
                 href="/blog"
@@ -162,7 +162,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                           {items.map((item: string, i: number) => {
                             return (
                               <li key={i} className="relative pl-8">
-                                <span className="flex absolute left-0 justify-center items-center w-6 h-6 text-sm font-black bg-yellow-400 border-2 border-black">
+                                <span className="flex absolute left-0 justify-center items-center w-6 h-6 text-sm font-black bg-cyan-400 border-2 border-black">
                                   {i + 1}
                                 </span>
                                 {item.replace(/^\d+\.\s+/g, "")}
@@ -196,7 +196,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <div className="mt-12 text-center">
               <Link
                 href="/blog"
-                className="inline-block px-8 py-4 font-black text-white uppercase bg-black border-4 border-black transition-colors duration-200 hover:bg-yellow-400 hover:text-black"
+                className="inline-block px-8 py-4 font-black text-white uppercase bg-black border-4 border-black transition-colors duration-200 hover:bg-cyan-400 hover:text-black"
               >
                 ← Back to All Posts
               </Link>
