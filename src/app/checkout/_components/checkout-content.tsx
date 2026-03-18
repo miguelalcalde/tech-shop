@@ -47,7 +47,7 @@ export default function CheckoutContent() {
           <ShoppingBag className="w-16 h-16 mx-auto mb-6 text-gray-400" />
           <p className="font-mono text-xl uppercase mb-6">Your cart is empty.</p>
           <Link href="/">
-            <Button className="bg-black text-white border-4 border-black px-8 py-4 font-black uppercase rounded-none hover:bg-yellow-400 hover:text-black transition-colors">
+            <Button className="bg-black text-white border-4 border-black px-8 py-4 font-black uppercase rounded-full hover:bg-yellow-400 hover:text-black transition-colors">
               Continue Shopping
             </Button>
           </Link>
@@ -248,7 +248,7 @@ export default function CheckoutContent() {
                 <Button
                   onClick={handlePlaceOrder}
                   disabled={isProcessing}
-                  className="w-full bg-black text-white border-4 border-black py-4 font-black uppercase rounded-none hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-black text-white border-4 border-black py-4 font-black uppercase rounded-full hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isProcessing ? "Processing..." : "Place Order"}
                 </Button>

@@ -83,7 +83,7 @@ export function NeoProductCard({
                 }}
                 className="w-full bg-black text-white border-2 border-black 
                           hover:bg-white hover:text-black font-bold text-lg py-6 
-                          transition-colors duration-200 rounded-none uppercase mt-auto"
+                          transition-colors duration-200 rounded-full uppercase mt-auto"
               >
                 Add to Cart
               </Button>

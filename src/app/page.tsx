@@ -73,7 +73,7 @@ export default async function Home() {
                 placeholder="Your email"
                 className="flex-1 border-4 border-black px-4 py-3 font-mono focus:outline-none focus:ring-4 focus:ring-yellow-400"
               />
-              <Button className="bg-black text-white border-4 border-black px-8 py-3 font-black uppercase rounded-none hover:bg-yellow-400 hover:text-black transition-colors">
+              <Button className="bg-black text-white border-4 border-black px-8 py-3 font-black uppercase rounded-full hover:bg-yellow-400 hover:text-black transition-colors">
                 Subscribe
               </Button>
             </div>

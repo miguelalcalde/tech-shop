@@ -78,7 +78,7 @@ body {
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+    --radius: 9999px;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -143,5 +143,34 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Global rounded borders - Apply rounded corners to all bordered elements */
+@layer components {
+  /* All elements with borders get rounded corners */
+  [class*="border-"] {
+    @apply rounded-2xl;
+  }
+  
+  /* Buttons get pill shape */
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  .btn {
+    @apply rounded-full;
+  }
+  
+  /* Inputs get rounded corners */
+  input:not([type="checkbox"]):not([type="radio"]),
+  textarea,
+  select {
+    @apply rounded-xl;
+  }
+  
+  /* Override any rounded-none classes */
+  .rounded-none {
+    @apply !rounded-2xl;
   }
 }

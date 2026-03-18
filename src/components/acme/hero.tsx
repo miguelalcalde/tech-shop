@@ -25,7 +25,7 @@ export function Hero({
   const CtaButton = (
     <Button
       className="bg-yellow-400 text-black border-4 border-black px-8 py-4 
-                font-black text-xl uppercase rounded-none
+                font-black text-xl uppercase rounded-full
                 hover:bg-black hover:text-yellow-400 hover:translate-x-[-4px] hover:translate-y-[-4px]
                 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-200"
       onClick={onCtaClick}
