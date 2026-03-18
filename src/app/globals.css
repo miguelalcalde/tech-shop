@@ -145,3 +145,32 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Global rounded borders - Apply rounded corners to all bordered elements */
+@layer components {
+  /* All elements with borders get rounded corners */
+  [class*="border-"] {
+    @apply rounded-2xl;
+  }
+  
+  /* Buttons get pill shape */
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  .btn {
+    @apply rounded-full;
+  }
+  
+  /* Inputs get rounded corners */
+  input:not([type="checkbox"]):not([type="radio"]),
+  textarea,
+  select {
+    @apply rounded-xl;
+  }
+  
+  /* Override any rounded-none classes */
+  .rounded-none {
+    @apply !rounded-2xl;
+  }
+}

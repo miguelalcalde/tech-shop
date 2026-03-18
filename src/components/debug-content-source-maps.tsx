@@ -26,7 +26,7 @@ export function DebugContentSourceMaps({
   } */
 
   return (
-    <div className="fixed bottom-20 right-4 bg-black text-white p-3 rounded-lg text-xs font-mono max-w-xs z-50">
+    <div className="fixed bottom-20 right-4 bg-black text-white p-3 rounded-2xl text-xs font-mono max-w-xs z-50">
       <div className="font-bold mb-1">🔍 Content Source Maps Debug</div>
       <div className="space-y-1">
         <div>
